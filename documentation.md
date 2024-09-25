@@ -80,8 +80,8 @@ To run the tests and generate a coverage report, use the following commands:
 
 ## Test Coverage Reports
 
-- Detailed coverage report can be accessed [here](coverage.html).
-- Tests report can be accessed [here](tests.jpg)
+- Detailed coverage report can be accessed [here](coverage.png).
+- Tests report can be accessed [here](tests.png)
 
 ## Conclusion
 
