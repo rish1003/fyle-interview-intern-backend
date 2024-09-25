@@ -1,0 +1,7 @@
+services:
+  fylein-app:
+    build: .
+    ports:
+      - "4040:7755"
+    volumes:
+      - .:/fyle_app  
