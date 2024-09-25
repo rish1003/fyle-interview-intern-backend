@@ -21,12 +21,12 @@ To run the application using Docker, you can use the following commands:
 
 1. **Build the Docker image:**
     ```bash
-    docker0compose build
+    docker-compose build
     ```
 
 2. **Run the Docker container:**
     ```bash
-    docker run -p 7755:7755 fyle-backend
+    docker-compose up
     ```
 3. **Go into docker bash**
     ```bash
