@@ -1,6 +1,8 @@
 [run]
 omit =
+    *myenv*
     *env/*
     *__pycache__/*
     *.pytest_cache/*
     *tests/*
+    gunicorn_config.py

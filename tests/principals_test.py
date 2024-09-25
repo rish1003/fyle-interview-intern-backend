@@ -1,4 +1,6 @@
+from core.libs.exceptions import FyleError
 from core.models.assignments import AssignmentStateEnum, GradeEnum
+from core.models.teachers import Teacher
 
 
 def test_get_assignments(client, h_principal):
@@ -60,3 +62,21 @@ def test_regrade_assignment(client, h_principal):
 
     assert response.json['data']['state'] == AssignmentStateEnum.GRADED.value
     assert response.json['data']['grade'] == GradeEnum.B
+
+def test_list_teachers(client, h_principal):
+    """
+    Test case for successfully retrieving the list of teachers.
+    """
+   
+    response = client.get('/principal/teachers', headers=h_principal)
+    assert response.status_code == 200  
+    data = response.json['data']
+    
+    assert isinstance(data, list)
+    assert len(data) > 0
+    for teacher in data:
+        assert 'id' in teacher # Check if 'id' is present in the teacher data
+        teacher = Teacher.get_by_id(teacher['id'])
+        assert teacher is not None, f"Teacher with ID {teacher['id']} should exist."
+        # Check if the representation matches the expected format
+        assert repr(teacher) == f'<Teacher {teacher.id!r}>', f"Expected representation for teacher ID {teacher.id} does not match."

@@ -1,7 +1,9 @@
 import pytest
 import json
+from core.models.principals import Principal
+from core.models.users import User
 from tests import app
-
+from core import db
 
 @pytest.fixture
 def client():
@@ -66,3 +68,22 @@ def h_principal():
     }
 
     return headers
+
+@pytest.fixture
+def new_user():
+    """Create a sample user once for testing and return its ID."""
+    user = User(username='testuser', email='test@example.com')
+    db.session.add(user)
+    db.session.commit()
+    yield user.id 
+    db.session.delete(user)
+    db.session.commit()
+
+@pytest.fixture()
+def new_principal():
+    principal = Principal(user_id=1)
+    db.session.add(principal)
+    db.session.commit()
+    yield principal
+    db.session.delete(principal)
+    db.session.commit()
